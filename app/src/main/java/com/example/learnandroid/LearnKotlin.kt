@@ -31,6 +31,20 @@ fun main() {
     h1.occupation = allOccupation[1]
     println("h1's occupation is " + h1.occupation + ", h1's name is " + h1.name)
 
+
+    //多态，接口
+    val h2 = Tank()
+    h2.name = "daji"
+    h2.occupation = allOccupation[3]
+
+    //h2实例化后，我们把h2作为参数传递到_moveAndAttack函数中，为什么可以传递？
+    //因为, 我们定义 _moveAndAttack函数接收到一个Tank类的参数，由于Tank类实现了moveAndAttack接口
+    //因此，Tank类的实例h2就可以传递到 _moveAndAttack函数中,从而调用Tank类里面的函数（重写move 和 attack）
+    _moveAndAttack(h2)
+
+
+
+
 }
 
 fun bigger(para1 : Int, para2 : Int) : Int {
@@ -73,3 +87,10 @@ fun prac_when3(str: String)  = when {
 
 
 //主构造函数，次构造函数待学习
+
+
+//多态: _moveAndAttack函数的形参为moveAndAttack类
+fun _moveAndAttack(para1: moveAndAttack) {
+    para1.move()
+    para1.attack()
+}
