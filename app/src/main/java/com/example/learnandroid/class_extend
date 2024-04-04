@@ -1,0 +1,11 @@
+//以wzry举例
+
+参考元素：英雄，职业，皮肤，装备，地图，玩法，个人数据,背包，任务等。
+
+class Hero: 名字，职业，基础生命值，物理/魔法攻击力，移动速度,攻击距离,攻击速度等
+    class Tank:extraHP
+    class assassin:extraMovementSpeed, extraAttackSpeed,
+    class ....
+
+class Kit: 攻击，法术，防御，移动，打野，游走。
+class Mode: match, rank, leisure.

@@ -28,10 +28,8 @@ fun main() {
     //实例化Hero, kotlin中不需要用到new
     val h1 = Hero()
     h1.name = "yase"
-    h1.occupation = arrayOf(h1.occupation[1])
-    println("h1's occupation is " + h1.occupation)
-
-
+    h1.occupation = allOccupation[1]
+    println("h1's occupation is " + h1.occupation + ", h1's name is " + h1.name)
 
 }
 
@@ -73,5 +71,5 @@ fun prac_when3(str: String)  = when {
     else -> println("waiting for add ...")
 }
 
-//--------------------------------------
-//start OOP
+
+//主构造函数，次构造函数待学习

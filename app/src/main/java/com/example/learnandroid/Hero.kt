@@ -1,18 +1,10 @@
 package com.example.learnandroid
 
-class Hero {
-    //hero's property,we need to change name and occupation,so var
+//set class Hero as open, so that is can be extended.
+open class Hero {
+    //hero's property,we need to change name and occupation,so use var
     var name = ""
-    //we should define array to experss occupation
-    //val names: Array<String> = arrayOf("Alice", "Bob", "Charlie")
-    var occupation: Array<String> = arrayOf(
-        "tank",
-        "warrior",
-        "assassin",
-        "mage",
-        "shooter",
-        "assistant",
-    )
+    var occupation = ""
 
     //hero's skill
     fun passive(){}
@@ -20,3 +12,15 @@ class Hero {
     fun skill2(){}
     fun skill3(){}
 }
+
+//we should define array to experss occupation
+//val names: Array<String> = arrayOf("Alice", "Bob", "Charlie")
+//use arrayOf we have not to define var occupation Array<String>
+var allOccupation = arrayOf(
+    "tank",
+    "warrior",
+    "assassin",
+    "mage",
+    "shooter",
+    "assistant",
+)
