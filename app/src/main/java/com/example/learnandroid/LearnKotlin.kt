@@ -63,4 +63,5 @@ fun prac_when3(str: String)  = when {
     else -> println("waiting for add ...")
 }
 
-
+//--------------------------------------
+//start OOP
