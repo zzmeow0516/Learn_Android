@@ -23,6 +23,16 @@ fun main() {
     for(i in range2 step 3) {
         println(i)
     }
+
+    //start OOP
+    //实例化Hero, kotlin中不需要用到new
+    val h1 = Hero()
+    h1.name = "yase"
+    h1.occupation = arrayOf(h1.occupation[1])
+    println("h1's occupation is " + h1.occupation)
+
+
+
 }
 
 fun bigger(para1 : Int, para2 : Int) : Int {
