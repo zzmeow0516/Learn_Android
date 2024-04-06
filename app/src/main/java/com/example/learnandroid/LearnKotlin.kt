@@ -42,6 +42,14 @@ fun main() {
     //因此，Tank类的实例h2就可以传递到 _moveAndAttack函数中,从而调用Tank类里面的函数（重写move 和 attack）
     _moveAndAttack(h2)
 
+    //data class
+    var phone1 = CellPhone("xiaomi", 2999.0)
+    var phone2 = CellPhone("iPhone", 6999.0)
+    //CellPhone类如果不用data修饰，那么打印出来的就只是phone1对象的内存地址
+    println(phone1)
+    println("two cellphone are diff ? " + (phone1 != phone2))
+
+
 
 
 
