@@ -34,7 +34,7 @@ class FirstActivity : AppCompatActivity() {
         */
         val button1: Button = findViewById(R.id.button1)
         button1.setOnClickListener {
-            Toast.makeText(this, "we click button1", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "hello, we click button1", Toast.LENGTH_SHORT).show()
         }
 
 
