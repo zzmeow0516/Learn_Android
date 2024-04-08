@@ -1,6 +1,8 @@
 package com.example.learnandroid
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -34,7 +36,7 @@ class FirstActivity : AppCompatActivity() {
         */
         val button1: Button = findViewById(R.id.button1)
         button1.setOnClickListener {
-            Toast.makeText(this, "we click button1", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "hello, we click button1", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -46,4 +48,26 @@ class FirstActivity : AppCompatActivity() {
         */
 
     }
+
+    //参数列表中的 menu: Menu? 表示这个方法接收一个 Menu 对象作为参数，这里的 Menu? 表示这个参数可以为 null
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //inflate()方法接收两个参数：第一个参数用于指定我们通过哪一个资源文件来创建菜单，这
+        //里当然是传入R.menu.main；第二个参数用于指定我们的菜单项将添加到哪一个Menu对象当
+        //中，这里直接使用onCreateOptionsMenu()方法中传入的menu参数。最后给这个方法返回
+        //true，表示允许创建的菜单显示出来，如果返回了false，创建的菜单将无法显示。
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_item -> Toast.makeText(this, "You clicked Add",
+                Toast.LENGTH_SHORT).show()
+            R.id.remove_item -> Toast.makeText(this, "You clicked Remove",
+                Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
+
+
 }
