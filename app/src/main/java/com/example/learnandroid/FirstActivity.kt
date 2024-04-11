@@ -39,6 +39,12 @@ class FirstActivity : AppCompatActivity() {
             Toast.makeText(this, "hello, we click button1", Toast.LENGTH_SHORT).show()
         }
 
+        val button2: Button = findViewById(R.id.button2)
+        button2.setOnClickListener {
+            Toast.makeText(this, "bye bye", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
 
         //这种方式已经被弃用了，现在采用viewBinding....
        /*
@@ -49,12 +55,15 @@ class FirstActivity : AppCompatActivity() {
 
     }
 
+    //总不能把所有的按钮都放在activity里吧，所以引出一个菜单menu，然后res -> menu -> menu.xml
     //参数列表中的 menu: Menu? 表示这个方法接收一个 Menu 对象作为参数，这里的 Menu? 表示这个参数可以为 null
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //inflate()方法接收两个参数：第一个参数用于指定我们通过哪一个资源文件来创建菜单，这
-        //里当然是传入R.menu.main；第二个参数用于指定我们的菜单项将添加到哪一个Menu对象当
-        //中，这里直接使用onCreateOptionsMenu()方法中传入的menu参数。最后给这个方法返回
-        //true，表示允许创建的菜单显示出来，如果返回了false，创建的菜单将无法显示。
+        //里当然是传入R.menu.main；
+        // 第二个参数用于指定我们的菜单项将添加到哪一个Menu对象当中，这里直接使用onCreateOptionsMenu()方法中传入的menu参数。
+        // 最后给这个方法返回true，表示允许创建的菜单显示出来，如果返回了false，创建的菜单将无法显示。
+
+        //kotlin语法: menuInflater 实际上是调用父类 getMenuInflater
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -65,6 +74,8 @@ class FirstActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
             R.id.remove_item -> Toast.makeText(this, "You clicked Remove",
                 Toast.LENGTH_SHORT).show()
+            R.id.settings_item -> Toast.makeText(this, "what the fuck you want setting?",
+                 Toast.LENGTH_LONG).show()
         }
         return true
     }
