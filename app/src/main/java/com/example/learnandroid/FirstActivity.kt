@@ -44,7 +44,12 @@ class FirstActivity : AppCompatActivity() {
         */
         val button1: Button = findViewById(R.id.button1)
         button1.setOnClickListener {
-            Toast.makeText(this, "hello, we click button1", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "call call call", Toast.LENGTH_SHORT).show()
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            //tel是一定要写的，不然就报错，提示没有activity响应intent
+            //在data部分指定了协议是tel，号码是10086
+            dialIntent.data = Uri.parse("tel:10010")
+            startActivity(dialIntent)
         }
 
         val button2: Button = findViewById(R.id.button2)

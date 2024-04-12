@@ -60,3 +60,33 @@ class MainActivity : AppCompatActivity(), OnButtonClickListener {
         Toast.makeText(this, "Button clicked!", Toast.LENGTH_SHORT).show()
     }
 }
+
+
+
+-----------------------------------------
+4.常见的 Intent 常量：
+
+  动作（Action）常量：
+  Intent.ACTION_VIEW：查看数据，如查看网页、查看地图等。
+  Intent.ACTION_EDIT：编辑数据，如编辑联系人信息等。
+  Intent.ACTION_DIAL：拨打电话。
+  Intent.ACTION_SEND：发送数据，如发送邮件、短信等。
+  Intent.ACTION_CALL：直接拨打电话（需要权限）。
+  Intent.ACTION_PICK：从数据中选择一个项。
+
+  类别（Category）常量：
+  Intent.CATEGORY_DEFAULT：默认类别。
+  Intent.CATEGORY_HOME：启动主屏幕。
+  Intent.CATEGORY_LAUNCHER：启动器类别。
+  Intent.CATEGORY_BROWSABLE：可浏览的类别，用于指定一个 Activity 可以被其他应用程序调用并查看。
+
+  数据类型（Data Type）常量：
+  Intent.ACTION_SENDTO：发送数据到指定的地址，如发送邮件到特定邮箱地址。
+  Intent.ACTION_SEND_MULTIPLE：发送多个数据。
+  Intent.ACTION_CALL_PRIVILEGED：特权拨号，直接拨打电话并跳过用户确认（需要权限）。
+
+  其他常量：
+  Intent.EXTRA_TEXT：发送文本数据的键值。
+  Intent.EXTRA_EMAIL：发送邮件的键值，用于指定邮件的接收人地址。
+  Intent.EXTRA_PHONE_NUMBER：拨打电话的键值，用于指定电话号码。
+  Intent.EXTRA_SUBJECT：发送邮件的键值，用于指定邮件主题。
