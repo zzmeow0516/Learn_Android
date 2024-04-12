@@ -58,7 +58,18 @@ class FirstActivity : AppCompatActivity() {
             // 通常在 Activity 或 Service 中使用 this 表示当前的 Activity 或 Service
             // 第二个参数传入SecondActivity::class.java作为目标Activity
             val intent = Intent(this, SecondActivity::class.java)
-            Log.v(TAG, "start another Intent")
+            Log.v(TAG, "start another Intent by explict intent")
+            startActivity(intent)
+        }
+
+        //隐式Intent
+        val button4: Button = findViewById(R.id.button4)
+        button4.setOnClickListener {
+
+            val intent = Intent("com.example.learnandroid.ACTION_START")
+            //调用Intent中的addCategory()方法来添加一个category
+            intent.addCategory("android.intent.category.MY_CATEGORY")
+            Log.v(TAG, "start another Intent by implict intent")
             startActivity(intent)
         }
 
