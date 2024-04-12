@@ -1,6 +1,8 @@
 package com.example.learnandroid
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -11,6 +13,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class FirstActivity : AppCompatActivity() {
+
+    private final val TAG = "myLog"
+
     //项目中的任何activity都需要override onCreate()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,18 @@ class FirstActivity : AppCompatActivity() {
         button2.setOnClickListener {
             Toast.makeText(this, "bye bye", Toast.LENGTH_SHORT).show()
             finish()
+        }
+
+        //显式Intent
+        val button3: Button = findViewById(R.id.button3)
+        button3.setOnClickListener {
+            //启动另外一个activity
+            //首先构建了一个Intent对象，第一个参数传入this也就是FirstActivity作为上下文，
+            // 通常在 Activity 或 Service 中使用 this 表示当前的 Activity 或 Service
+            // 第二个参数传入SecondActivity::class.java作为目标Activity
+            val intent = Intent(this, SecondActivity::class.java)
+            Log.v(TAG, "start another Intent")
+            startActivity(intent)
         }
 
 
