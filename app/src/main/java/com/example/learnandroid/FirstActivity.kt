@@ -1,6 +1,10 @@
 package com.example.learnandroid
 
+import android.content.Intent
+import android.net.Uri
+import android.net.UrlQuerySanitizer
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -9,8 +13,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.net.URL
 
 class FirstActivity : AppCompatActivity() {
+
+    private final val TAG = "myLog"
+
     //项目中的任何activity都需要override onCreate()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +47,47 @@ class FirstActivity : AppCompatActivity() {
             Toast.makeText(this, "hello, we click button1", Toast.LENGTH_SHORT).show()
         }
 
+        val button2: Button = findViewById(R.id.button2)
+        button2.setOnClickListener {
+            Toast.makeText(this, "bye bye", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        //显式Intent
+        val button3: Button = findViewById(R.id.button3)
+        button3.setOnClickListener {
+            //启动另外一个activity
+            //首先构建了一个Intent对象，第一个参数传入this也就是FirstActivity作为上下文，
+            // 通常在 Activity 或 Service 中使用 this 表示当前的 Activity 或 Service
+            // 第二个参数传入SecondActivity::class.java作为目标Activity
+            val intent = Intent(this, SecondActivity::class.java)
+            Log.v(TAG, "start another Intent by explict intent")
+            startActivity(intent)
+        }
+
+        //隐式Intent
+        val button4: Button = findViewById(R.id.button4)
+        button4.setOnClickListener {
+
+            val intent = Intent("com.example.learnandroid.ACTION_START")
+            //调用Intent中的addCategory()方法来添加一个category
+            intent.addCategory("android.intent.category.MY_CATEGORY")
+            Log.v(TAG, "start another Intent by implict intent")
+            startActivity(intent)
+        }
+
+        //隐式intent的更多用法：打开浏览器
+        val button5: Button = findViewById(R.id.button5)
+        button5.setOnClickListener {
+
+            //ACTION_VIEW 是 Android 系统中的一个标准动作，用于显示指定的数据（如网址、文件等）
+            val intent = Intent(Intent.ACTION_VIEW)
+            //将字符串形式的网址解析为一个 Uri 对象，并将这个 Uri 对象设置为 Intent 的数据
+            intent.data = Uri.parse("https://github.com/zzmeow0516")
+            Log.v(TAG, "open browser")
+            startActivity(intent)
+        }
+
 
         //这种方式已经被弃用了，现在采用viewBinding....
        /*
@@ -49,12 +98,15 @@ class FirstActivity : AppCompatActivity() {
 
     }
 
+    //总不能把所有的按钮都放在activity里吧，所以引出一个菜单menu，然后res -> menu -> menu.xml
     //参数列表中的 menu: Menu? 表示这个方法接收一个 Menu 对象作为参数，这里的 Menu? 表示这个参数可以为 null
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //inflate()方法接收两个参数：第一个参数用于指定我们通过哪一个资源文件来创建菜单，这
-        //里当然是传入R.menu.main；第二个参数用于指定我们的菜单项将添加到哪一个Menu对象当
-        //中，这里直接使用onCreateOptionsMenu()方法中传入的menu参数。最后给这个方法返回
-        //true，表示允许创建的菜单显示出来，如果返回了false，创建的菜单将无法显示。
+        //里当然是传入R.menu.main；
+        // 第二个参数用于指定我们的菜单项将添加到哪一个Menu对象当中，这里直接使用onCreateOptionsMenu()方法中传入的menu参数。
+        // 最后给这个方法返回true，表示允许创建的菜单显示出来，如果返回了false，创建的菜单将无法显示。
+
+        //kotlin语法: menuInflater 实际上是调用父类 getMenuInflater
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -65,6 +117,8 @@ class FirstActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
             R.id.remove_item -> Toast.makeText(this, "You clicked Remove",
                 Toast.LENGTH_SHORT).show()
+            R.id.settings_item -> Toast.makeText(this, "what the fuck you want setting?",
+                 Toast.LENGTH_LONG).show()
         }
         return true
     }

@@ -1,0 +1,62 @@
+1.android加载布局：
+1. 在 Activity 或 Fragment 中 ，使用 LayoutInflater 的 inflate函数加载布局，并将其转换成View对象。
+2. 在 Activity 的 onCreate 方法中通过 setContentView 方法直接加载布局文件
+3. 在 Fragment 的 onCreateView 方法中加载布局文件
+4. RecyclerView
+
+-------------------------------
+2.用如下代码来设置和读取Book类中的pages字段：
+val book = Book()
+book.pages = 500
+val bookPages = book.pages
+这里看上去好像我们并没有调用Book类的setPages()和getPages()方法，而是直接对
+pages字段进行了赋值和读取。其实这就是Kotlin给我们提供的语法糖，它会在背后自动将上述
+代码转换成调用setPages()方法和getPages()方法。
+
+------------------------------------
+3.监听与回调
+
+// 定义一个接口，用于回调处理事件
+interface OnButtonClickListener {
+    fun onButtonClick()
+}
+
+// 在 Activity 或者 Fragment 中定义监听器变量和回调方法
+class MyActivity : AppCompatActivity() {
+
+    private var buttonClickListener: OnButtonClickListener? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_my)
+
+        // 设置按钮点击事件监听器
+        findViewById<Button>(R.id.button).setOnClickListener {
+            // 当按钮被点击时，调用回调方法
+            buttonClickListener?.onButtonClick()
+        }
+    }
+
+    // 提供设置监听器的方法
+    fun setOnButtonClickListener(listener: OnButtonClickListener) {
+        this.buttonClickListener = listener
+    }
+}
+------------------------------
+//MainActivity实现OnButtonClickListener接口，override 这个接口中的 onButtonClick 方法
+class MainActivity : AppCompatActivity(), OnButtonClickListener {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val myActivity = MyActivity()
+        //设置监听器为 MainActivity 自身，因为 MainActivity 实现了 OnButtonClickListener 接口中的方法
+        myActivity.setOnButtonClickListener(this)
+    }
+
+    override fun onButtonClick() {
+        // 处理按钮点击事件
+        Toast.makeText(this, "Button clicked!", Toast.LENGTH_SHORT).show()
+    }
+}
