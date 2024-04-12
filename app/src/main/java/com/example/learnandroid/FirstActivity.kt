@@ -1,6 +1,8 @@
 package com.example.learnandroid
 
 import android.content.Intent
+import android.net.Uri
+import android.net.UrlQuerySanitizer
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.net.URL
 
 class FirstActivity : AppCompatActivity() {
 
@@ -70,6 +73,18 @@ class FirstActivity : AppCompatActivity() {
             //调用Intent中的addCategory()方法来添加一个category
             intent.addCategory("android.intent.category.MY_CATEGORY")
             Log.v(TAG, "start another Intent by implict intent")
+            startActivity(intent)
+        }
+
+        //隐式intent的更多用法：打开浏览器
+        val button5: Button = findViewById(R.id.button5)
+        button5.setOnClickListener {
+
+            //ACTION_VIEW 是 Android 系统中的一个标准动作，用于显示指定的数据（如网址、文件等）
+            val intent = Intent(Intent.ACTION_VIEW)
+            //将字符串形式的网址解析为一个 Uri 对象，并将这个 Uri 对象设置为 Intent 的数据
+            intent.data = Uri.parse("https://github.com/zzmeow0516")
+            Log.v(TAG, "open browser")
             startActivity(intent)
         }
 
