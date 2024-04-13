@@ -1,5 +1,6 @@
 package com.example.learnandroid
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.net.UrlQuerySanitizer
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,7 +19,29 @@ import java.net.URL
 
 class FirstActivity : AppCompatActivity() {
 
-    private final val TAG = "myLog"
+    private final val TAG = "myLog_FirstActivity"
+    public  final val AUDIO_OUT_STREAM_MUSIC = 0x3
+
+    //注册一个 ActivityResultLauncher
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        //这段 lambda 表达式包含了一个参数 result，它代表了从启动的 Activity 返回的结果
+        result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            Log.v(TAG, "we have a result")
+            //先获取到intent,这里是backData
+            val backData = result.data
+            ////实际上调用的是Intent.getIntExtra
+            //神奇的kotlin,不需要用到下面的判空，只需要加上一个 ? ,就可以避免空指针
+            val backValue = backData?.getIntExtra("music done", 0)
+            Log.v(TAG, "backValue = $backValue")
+//            if (backData != null) {
+//                //实际上调用的是Intent.getIntExtra
+//                val backValue = backData.getIntExtra("music done", 0)
+//                Log.v(TAG, "backValue = $backValue")
+//            }
+        }
+    }
+
 
     //项目中的任何activity都需要override onCreate()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,13 +85,7 @@ class FirstActivity : AppCompatActivity() {
         //显式Intent
         val button3: Button = findViewById(R.id.button3)
         button3.setOnClickListener {
-            //启动另外一个activity
-            //首先构建了一个Intent对象，第一个参数传入this也就是FirstActivity作为上下文，
-            // 通常在 Activity 或 Service 中使用 this 表示当前的 Activity 或 Service
-            // 第二个参数传入SecondActivity::class.java作为目标Activity
-            val intent = Intent(this, SecondActivity::class.java)
-            Log.v(TAG, "start another Intent by explict intent")
-            startActivity(intent)
+            startSecondActivity()
         }
 
         //隐式Intent
@@ -103,6 +121,7 @@ class FirstActivity : AppCompatActivity() {
 
     }
 
+
     //总不能把所有的按钮都放在activity里吧，所以引出一个菜单menu，然后res -> menu -> menu.xml
     //参数列表中的 menu: Menu? 表示这个方法接收一个 Menu 对象作为参数，这里的 Menu? 表示这个参数可以为 null
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -128,5 +147,17 @@ class FirstActivity : AppCompatActivity() {
         return true
     }
 
+    //这个函数不能够写在onCreate里面，，，憨憨
+    private fun startSecondActivity() {
+            //启动另外一个activity
+            //首先构建了一个Intent对象，第一个参数传入this也就是FirstActivity作为上下文，
+            // 通常在 Activity 或 Service 中使用 this 表示当前的 Activity 或 Service
+            // 第二个参数传入SecondActivity::class.java作为目标Activity
+            val intent = Intent(this, SecondActivity::class.java)
+            //利用intent.putExtra传递一个键值对，然后在目标activity那边接收
+            intent.putExtra("AUDIO_OUT_STREAM_MUSIC",AUDIO_OUT_STREAM_MUSIC)
+            Log.v(TAG, "start another Intent by explict intent")
+            startForResult.launch(intent)
+    }
 
 }

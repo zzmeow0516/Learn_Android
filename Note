@@ -90,3 +90,41 @@ class MainActivity : AppCompatActivity(), OnButtonClickListener {
   Intent.EXTRA_EMAIL：发送邮件的键值，用于指定邮件的接收人地址。
   Intent.EXTRA_PHONE_NUMBER：拨打电话的键值，用于指定电话号码。
   Intent.EXTRA_SUBJECT：发送邮件的键值，用于指定邮件主题。
+
+-------------------------------
+5.怎么实现两个activity之间的数据传输（省略了import导包步骤和具体的resultKey...）
+
+先在 FirstActivity 的 Kotlin 代码中，你需要注册一个 ActivityResultLauncher，并在点击按钮时启动 SecondActivity：
+//这里用到了lambda表达式
+private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                val resultValue = data?.getStringExtra("resultKey")
+                // 处理从 SecondActivity 返回的结果
+            }
+        }
+
+然后编写startSecondActivity：
+private fun startSecondActivity() {
+            val intent = Intent(this, SecondActivity::class.java)
+            startForResult.launch(intent)
+        }
+
+然后在FirstActivity的button的监听中调用startSecondActivity：
+button1.setOnClickListener {
+            startSecondActivity()
+        }
+
+然后，在 SecondActivity 的 Kotlin 代码中，你需要在按钮点击事件中设置返回结果并关闭当前 Activity：
+因此先编写 returnResult：
+private fun returnResult() {
+             val resultIntent = Intent()
+             resultIntent.putExtra("resultKey", "resultValue")
+             setResult(Activity.RESULT_OK, resultIntent)
+             finish()
+         }
+然后
+button2.setOnClickListener {
+              returnResult()
+          }

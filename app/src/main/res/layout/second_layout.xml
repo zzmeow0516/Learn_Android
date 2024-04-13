@@ -8,7 +8,7 @@
     tools:context=".SecondActivity">
 
     <Button
-        android:id="@+id/button_anotherActivity1"
+        android:id="@+id/button_another1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="another button"

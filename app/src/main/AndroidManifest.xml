@@ -26,7 +26,7 @@
 
         <activity
             android:name=".SecondActivity"
-            android:exported="false">
+            android:exported="true">
 
             <!--
             在<action>标签中我们指明了当前Activity可以响应
