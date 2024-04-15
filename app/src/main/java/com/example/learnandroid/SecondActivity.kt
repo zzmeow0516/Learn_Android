@@ -17,6 +17,7 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        Log.d(TAG, "Task id is $taskId")
         setContentView(R.layout.second_layout)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,11 +33,14 @@ class SecondActivity : AppCompatActivity() {
 
         val button: Button = findViewById(R.id.button_another1)
         button.setOnClickListener() {
-            returnResult()
+            val intent = Intent(this, ThirdActivity::class.java)
+            startActivity(intent)
+            //returnResult()
         }
 
     }
 
+    //for Android Activity API
     private fun returnResult() {
         val resultIntent = Intent()
         val resultKey = "music done"

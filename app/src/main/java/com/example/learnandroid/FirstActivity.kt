@@ -48,7 +48,8 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //调用setContentView为当前的activity加载first_layout布局
         setContentView(R.layout.first_layout)
-        Log.v(TAG, this.toString())
+        //woc,这个taskId竟然可以直接用，实际上是调用父类的getTaskId()
+        Log.v(TAG, "taskId is $taskId")
 
         /*
         * 在Activity中，可以通过findViewById()方法获取在布局文件中定义的元素，这里我们传入
@@ -115,7 +116,7 @@ class FirstActivity : AppCompatActivity() {
         //activity launchMode
         val button6: Button = findViewById(R.id.button6)
         button6.setOnClickListener {
-            val intent = Intent(this, FirstActivity::class.java)
+            val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
 

@@ -24,8 +24,10 @@
             </intent-filter>
         </activity>
 
+        <!--launchMode = singleInstance就是让这个activity独享一个新的返回栈-->
         <activity
             android:name=".SecondActivity"
+            android:launchMode="singleInstance"
             android:exported="true">
 
             <!--
@@ -37,7 +39,6 @@
             -->
             <intent-filter>
                 <action android:name="com.example.learnandroid.ACTION_START" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MY_CATEGORY" />
             </intent-filter>
