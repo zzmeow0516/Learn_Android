@@ -48,6 +48,7 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //调用setContentView为当前的activity加载first_layout布局
         setContentView(R.layout.first_layout)
+        Log.v(TAG, this.toString())
 
         /*
         * 在Activity中，可以通过findViewById()方法获取在布局文件中定义的元素，这里我们传入
@@ -71,7 +72,7 @@ class FirstActivity : AppCompatActivity() {
             Toast.makeText(this, "call call call", Toast.LENGTH_SHORT).show()
             val dialIntent = Intent(Intent.ACTION_DIAL)
             //tel是一定要写的，不然就报错，提示没有activity响应intent
-            //在data部分指定了协议是tel，号码是10086
+            //在data部分指定了协议是tel，号码是10010
             dialIntent.data = Uri.parse("tel:10010")
             startActivity(dialIntent)
         }
@@ -110,6 +111,14 @@ class FirstActivity : AppCompatActivity() {
             Log.v(TAG, "open browser")
             startActivity(intent)
         }
+
+        //activity launchMode
+        val button6: Button = findViewById(R.id.button6)
+        button6.setOnClickListener {
+            val intent = Intent(this, FirstActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         //这种方式已经被弃用了，现在采用viewBinding....

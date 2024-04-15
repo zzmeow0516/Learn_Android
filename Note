@@ -128,3 +128,11 @@ private fun returnResult() {
 button2.setOnClickListener {
               returnResult()
           }
+
+
+
+-------------------------------------------
+activity启动模式：
+standard
+singleTop
+singleTask
