@@ -17,7 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.net.URL
 
-class FirstActivity : AppCompatActivity() {
+class FirstActivity : BaseActivity() {
 
     private final val TAG = "myLog_FirstActivity"
     public  final val AUDIO_OUT_STREAM_MUSIC = 0x3

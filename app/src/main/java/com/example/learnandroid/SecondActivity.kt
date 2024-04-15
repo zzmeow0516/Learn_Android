@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class SecondActivity : AppCompatActivity() {
+class SecondActivity : BaseActivity() {
 
     private final val TAG = "myLog_SecondActivity"
 
