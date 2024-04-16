@@ -21,6 +21,13 @@ open class BaseActivity() : AppCompatActivity(), Parcelable {
         //Kotlin中的javaClass表示获取当前实例的Class对象
         //Kotlin中的BaseActivity::class.java表示获取BaseActivity类的Class对象
         Log.v(TAG, javaClass.simpleName)
+        ActivityCollector.addActivity(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.v(TAG, javaClass.simpleName)
+        ActivityCollector.removeActivity(this)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
