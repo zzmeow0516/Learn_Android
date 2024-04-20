@@ -50,7 +50,8 @@ fun main() {
     println("two cellphone are diff ? " + (phone1 != phone2))
 
 
-
+    //lambda
+    lambdaPrac()
 
 
 }
@@ -107,17 +108,43 @@ fun _moveAndAttack(para1: moveAndAttack) {
 
 //lambda编程
 fun lambdaPrac() {
+    //这边使用 List
     val Heros = listOf("daji", "yase", "houyi")
-    val fruits = mutableListOf("apple", "watermalon")
+    val fruits = mutableListOf("apple", "watermelon")
     fruits.add("grapes")
 
-    val map = mapOf("apple" to 1, "watermalon" to 2, "banana" to 3)
-    val map1 = mutableMapOf("apple" to 1, "watermalon" to 2, "banana" to 3)
+    //这边使用 map： key-value
+    //这个 to 实际上调用的是 infix
+    val fruits1 = mapOf("apple" to 1, "watermelon" to 2, "banana" to 3)
+    val map1 = mutableMapOf("apple" to 1, "watermelon" to 2, "banana" to 3)
     map1.put("grapes", 4)
 
     //map的遍历方式
     for ((fruits, num) in map1) {
         println("fruits = $fruits, num is $num")
     }
+
+    //集合的函数式API ---minBy
+    val lambda1 = {fruits: String -> fruits.length}
+    val maxLenth = fruits.minBy(lambda1)
+    println("maxLength = $maxLenth")
+    //逐步简化
+    val maxLength1 = fruits.minBy({fruits: String -> fruits.length})
+    val maxLength2 = fruits.minBy () {fruits: String -> fruits.length  }        //lambda是最后一个参数，可以写到括号外面
+    val maxLength3 = fruits.minBy {fruits: String -> fruits.length  }           //只有一个参数，括号也不用写了
+    val maxLength4 = fruits.minBy { fruits -> fruits.length }                   //类型推导
+    val maxLength5 = fruits.minBy { it.length }                                 //lambda表达式也只有一个参数，省略参数名，用it代替
+
+    //集合的函数式API ---map: 把集合中的元素都映射成另外一个值
+    val FRUITS = fruits.map { it.uppercase() }
+    //集合的函数式API ---filter
+    //先filter再uppercase
+    val FRUITS1 = fruits.filter { it.length > 5 }.map {it.uppercase()}
+
+    //集合的函数式API ---any, all
+    val anyResult = fruits.any { it.length < 5 }
+    val allResult = fruits.all { it.length > 5 }
 }
+
+
 
