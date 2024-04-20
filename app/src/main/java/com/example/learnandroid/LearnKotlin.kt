@@ -102,3 +102,22 @@ fun _moveAndAttack(para1: moveAndAttack) {
     para1.move()
     para1.attack()
 }
+
+//字符串内嵌表达式 $
+
+//lambda编程
+fun lambdaPrac() {
+    val Heros = listOf("daji", "yase", "houyi")
+    val fruits = mutableListOf("apple", "watermalon")
+    fruits.add("grapes")
+
+    val map = mapOf("apple" to 1, "watermalon" to 2, "banana" to 3)
+    val map1 = mutableMapOf("apple" to 1, "watermalon" to 2, "banana" to 3)
+    map1.put("grapes", 4)
+
+    //map的遍历方式
+    for ((fruits, num) in map1) {
+        println("fruits = $fruits, num is $num")
+    }
+}
+
